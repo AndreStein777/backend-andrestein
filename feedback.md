@@ -1,3 +1,3 @@
-Feedback - Aula 02 e Aula 03
+# Feedback - Aula 02
 
-André, na aula 2 você não chegou a entregar nada, ficou só o commit inicial do template, nota 0,00. Na aula 3 também não teve entrega, outro 0,00. Precisa recuperar as duas.
+André, seu repositório continua exatamente como veio do template, nenhuma linha sua ainda. A aula 2 pede as 5 rotas (GET, GET id, POST, PUT, DELETE) funcionando. Vou lançar a nota até sexta-feira, esse é o tempo que resta pra você entregar pelo menos essa primeira parte. Sem isso a nota fica zero.
