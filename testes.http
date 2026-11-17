@@ -1,5 +1,5 @@
 
-### 1 - Listar treinos
+### 1 - Listar todos os treinos
 GET http://localhost:3000/treinos
 
 ### 2 - Criar treino
@@ -20,13 +20,13 @@ Content-Type: application/json
     "duracao": 45
 }
 
-### 4 - Buscar treino existente
+### 4 - Buscar treino pelo ID
 GET http://localhost:3000/treinos/1
 
 ### 5 - Buscar treino inexistente
-GET http://localhost:3000/treinos/99
+GET http://localhost:3000/treinos/999
 
-### 6 - Criar treino sem nome
+### 6 - Criar sem nome
 POST http://localhost:3000/treinos
 Content-Type: application/json
 
@@ -34,7 +34,7 @@ Content-Type: application/json
     "duracao": 30
 }
 
-### 7 - Criar treino com duração inválida
+### 7 - Criar com duração inválida
 POST http://localhost:3000/treinos
 Content-Type: application/json
 
@@ -53,7 +53,7 @@ Content-Type: application/json
 }
 
 ### 9 - Atualizar treino inexistente
-PUT http://localhost:3000/treinos/99
+PUT http://localhost:3000/treinos/999
 Content-Type: application/json
 
 {
@@ -65,7 +65,31 @@ Content-Type: application/json
 DELETE http://localhost:3000/treinos/2
 
 ### 11 - Excluir treino inexistente
-DELETE http://localhost:3000/treinos/99
+DELETE http://localhost:3000/treinos/999
 
-### 12 - Listar treinos novamente
+### 12 - Listar novamente
 GET http://localhost:3000/treinos
+
+
+### EXERCÍCIO 1 - TOTAL
+GET http://localhost:3000/treinos/total
+
+
+### EXERCÍCIO 2 - FILTRAR POR DURAÇÃO
+GET http://localhost:3000/treinos?minimo=40
+
+
+### EXERCÍCIO 3 - ORDENAR POR DURAÇÃO
+GET http://localhost:3000/treinos
+
+
+### EXERCÍCIO 4 - BUSCAR POR NOME
+GET http://localhost:3000/treinos?busca=peito
+
+
+### EXERCÍCIO 5 - RESUMO
+GET http://localhost:3000/treinos/resumo
+
+
+### EXERCÍCIO 6 - ID INVÁLIDO
+GET http://localhost:3000/treinos/abc
