@@ -1,16 +1,117 @@
 const express = require('express');
-const controller = require('./controllers/treinosController.js');
 
 const app = express();
+
 app.use(express.json());
 
-app.get('/treinos', controller.listar);
-app.get('/treinos/:id', controller.buscarUm);
-app.post('/treinos', controller.criar);
-app.put('/treinos/:id', controller.atualizar);
-app.delete('/treinos/:id', controller.remover);
+// Array que armazena os treinos
+let treinos = [];
 
-const PORTA = 3000;
-app.listen(PORTA, () => {
-    console.log(`Servidor rodando em http://localhost:${PORTA}`);
+// Próximo ID disponível
+let proximoId = 1;
+
+// Função para validar os dados do treino
+function validarTreino(corpo) {
+    if (
+        typeof corpo.nome !== 'string' ||
+        corpo.nome.trim() === ''
+    ) {
+        return 'O campo nome e obrigatorio e deve ser um texto.';
+    }
+
+    if (
+        typeof corpo.duracao !== 'number' ||
+        corpo.duracao <= 0
+    ) {
+        return 'O campo duracao e obrigatorio e deve ser um numero maior que zero.';
+    }
+
+    return null;
+}
+
+// GET /treinos - Listar todos os treinos
+app.get('/treinos', (req, res) => {
+    res.status(200).json(treinos);
+});
+
+// POST /treinos - Criar um treino
+app.post('/treinos', (req, res) => {
+    const erro = validarTreino(req.body);
+
+    if (erro !== null) {
+        return res.status(400).json({ erro: erro });
+    }
+
+    const treino = {
+        id: proximoId,
+        nome: req.body.nome,
+        duracao: req.body.duracao
+    };
+
+    proximoId = proximoId + 1;
+
+    treinos.push(treino);
+
+    res.status(201).json(treino);
+});
+
+// GET /treinos/:id - Buscar um treino
+app.get('/treinos/:id', (req, res) => {
+    const id = Number(req.params.id);
+
+    const treino = treinos.find((t) => t.id === id);
+
+    if (treino === undefined) {
+        return res.status(404).json({
+            erro: 'Treino nao encontrado.'
+        });
+    }
+
+    res.status(200).json(treino);
+});
+
+// PUT /treinos/:id - Atualizar um treino
+app.put('/treinos/:id', (req, res) => {
+    const id = Number(req.params.id);
+
+    const treino = treinos.find((t) => t.id === id);
+
+    if (treino === undefined) {
+        return res.status(404).json({
+            erro: 'Treino nao encontrado.'
+        });
+    }
+
+    const erro = validarTreino(req.body);
+
+    if (erro !== null) {
+        return res.status(400).json({ erro: erro });
+    }
+
+    treino.nome = req.body.nome;
+    treino.duracao = req.body.duracao;
+
+    res.status(200).json(treino);
+});
+
+// DELETE /treinos/:id - Excluir um treino
+app.delete('/treinos/:id', (req, res) => {
+    const id = Number(req.params.id);
+
+    const posicao = treinos.findIndex((t) => t.id === id);
+
+    if (posicao === -1) {
+        return res.status(404).json({
+            erro: 'Treino nao encontrado.'
+        });
+    }
+
+    treinos.splice(posicao, 1);
+
+    res.status(204).end();
+});
+
+// Iniciar servidor
+app.listen(3000, () => {
+    console.log('Servidor rodando em http://localhost:3000');
 });

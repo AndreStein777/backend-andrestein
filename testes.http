@@ -1,20 +1,9 @@
-### ============================================================
-### testes.http - o contrato da API
-### ============================================================
-### Abra este arquivo no VS Code com a extensao REST Client e
-### clique em "Send Request" em cada bloco.
-### Voce terminou a aula quando TODAS responderem o status certo.
-### ============================================================
 
-@url = http://localhost:3000
+### 1 - Listar treinos
+GET http://localhost:3000/treinos
 
-
-### 1 - Listar todos os treinos            -> espera 200 e um array
-GET {{url}}/treinos
-
-
-### 2 - Criar um treino                    -> espera 201
-POST {{url}}/treinos
+### 2 - Criar treino
+POST http://localhost:3000/treinos
 Content-Type: application/json
 
 {
@@ -22,9 +11,8 @@ Content-Type: application/json
     "duracao": 60
 }
 
-
-### 3 - Criar outro treino                 -> espera 201
-POST {{url}}/treinos
+### 3 - Criar outro treino
+POST http://localhost:3000/treinos
 Content-Type: application/json
 
 {
@@ -32,61 +20,52 @@ Content-Type: application/json
     "duracao": 45
 }
 
+### 4 - Buscar treino existente
+GET http://localhost:3000/treinos/1
 
-### 4 - Buscar o treino 1                  -> espera 200
-GET {{url}}/treinos/1
+### 5 - Buscar treino inexistente
+GET http://localhost:3000/treinos/99
 
-
-### 5 - Buscar um treino que nao existe    -> espera 404
-GET {{url}}/treinos/99999
-
-
-### 6 - Criar sem o nome                   -> espera 400
-POST {{url}}/treinos
+### 6 - Criar treino sem nome
+POST http://localhost:3000/treinos
 Content-Type: application/json
 
 {
     "duracao": 30
 }
 
-
-### 7 - Criar com duracao invalida         -> espera 400
-POST {{url}}/treinos
+### 7 - Criar treino com duração inválida
+POST http://localhost:3000/treinos
 Content-Type: application/json
 
 {
-    "nome": "Corrida",
-    "duracao": -5
+    "nome": "Pernas",
+    "duracao": 0
 }
 
-
-### 8 - Alterar o treino 1                 -> espera 200
-PUT {{url}}/treinos/1
+### 8 - Atualizar treino
+PUT http://localhost:3000/treinos/1
 Content-Type: application/json
 
 {
-    "nome": "Peito, triceps e ombro",
-    "duracao": 75
+    "nome": "Peito completo",
+    "duracao": 70
 }
 
-
-### 9 - Alterar um treino que nao existe   -> espera 404
-PUT {{url}}/treinos/99999
+### 9 - Atualizar treino inexistente
+PUT http://localhost:3000/treinos/99
 Content-Type: application/json
 
 {
-    "nome": "Qualquer",
-    "duracao": 10
+    "nome": "Ombro",
+    "duracao": 40
 }
 
+### 10 - Excluir treino
+DELETE http://localhost:3000/treinos/2
 
-### 10 - Apagar o treino 2                 -> espera 204 (sem corpo)
-DELETE {{url}}/treinos/2
+### 11 - Excluir treino inexistente
+DELETE http://localhost:3000/treinos/99
 
-
-### 11 - Apagar um treino que nao existe   -> espera 404
-DELETE {{url}}/treinos/99999
-
-
-### 12 - Listar de novo pra conferir       -> espera 200
-GET {{url}}/treinos
+### 12 - Listar treinos novamente
+GET http://localhost:3000/treinos
