@@ -1,3 +1,3 @@
-# Feedback - Aula 02
+André, suas aulas 02, 03 e 04 estão certas. Entreguei com atraso grande, mas o código bate com o que eu pedi nas três: CRUD completo com SQLite, filtro, ordenação e validação de id na aula 02 e na aula 03, e a estrutura em camadas no commit que você fez pra aula 04. Essa nota está garantida.
 
-André, seu repositório continua exatamente como veio do template, nenhuma linha sua ainda. A aula 2 pede as 5 rotas (GET, GET id, POST, PUT, DELETE) funcionando. Vou lançar a nota até sexta-feira, esse é o tempo que resta pra você entregar pelo menos essa primeira parte. Sem isso a nota fica zero.
+Os outros 2 pontos desse primeiro momento são a arguição, na próxima aula, no laboratório.
